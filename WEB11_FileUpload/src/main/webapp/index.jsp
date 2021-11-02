@@ -7,7 +7,7 @@
 	</head>
 	<body>
 		<%
-		response.sendRedirect("01_Upload.jsp");
+		response.sendRedirect("productlist.do");
 		%>
 	</body>
 </html>
