@@ -7,7 +7,7 @@
 	</head>
 	<body>
 		<%
-		response.sendRedirect("board.do?command=loginForm");
+		response.sendRedirect("01_Upload.jsp");
 		%>
 	</body>
 </html>
