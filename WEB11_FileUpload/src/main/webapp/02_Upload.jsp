@@ -6,7 +6,7 @@
 		<title>02_Upload</title>
 	</head>
 	<body>
-		<form action="upload.do" method="post" enctype="multipart/form-data">
+		<form action="upload2.do" method="post" enctype="multipart/form-data">
 			1. 파일 지정하기 : <input type="file" name="uploadFile01"><br>
 			2. 파일 지정하기 : <input type="file" name="uploadFile02"><br>
 			3. 파일 지정하기 : <input type="file" name="uploadFile03"><br>
