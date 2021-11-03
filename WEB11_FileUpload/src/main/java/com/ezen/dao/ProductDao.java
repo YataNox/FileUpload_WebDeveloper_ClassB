@@ -108,5 +108,20 @@ public class ProductDao {
 			DBman.close(con, pstmt, rs);
 		}
 	}
+
+	public void deleteProduct(String code) {
+		String sql = "delete from bookproduct where code = ?";
+		
+		try {
+			con = DBman.getConnection();
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, Integer.parseInt(code));
+			pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			DBman.close(con, pstmt, rs);
+		}
+	}
 	
 }
