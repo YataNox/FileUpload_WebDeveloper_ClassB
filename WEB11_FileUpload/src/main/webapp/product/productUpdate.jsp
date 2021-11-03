@@ -58,7 +58,10 @@
 							</table>
 						</td>
 					</tr>
-				</table>
+				</table><br>
+				<input type="submit" value="수정">
+				<input type="reset" value="다시작성">
+				<input type="button" value="목록" onclick="location.href='productlist.do'">
 			</form>
 		</div>
 	</body>
