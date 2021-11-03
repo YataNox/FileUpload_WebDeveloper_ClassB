@@ -63,7 +63,7 @@ public class ProductUpdateServlet extends HttpServlet {
 			String name = multi.getParameter("name");
 			int price = Integer.parseInt(multi.getParameter("price"));
 			String description = multi.getParameter("description");
-			String pictureurl = multi.getParameter("pictureurl");
+			String pictureurl = multi.getFilesystemName("pictureurl");
 			// 수정하고자 하는 이미지 이름이 널 값이라면, 기존 이미지 이름이 현재 수정 대상의 이미지 이름
 			// 으로 세트 됩니다.
 			if(pictureurl == null)
