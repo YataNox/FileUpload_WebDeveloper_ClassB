@@ -44,6 +44,32 @@ public class ProductDao {
 		
 		return list;
 	}
+
+	public ProductVO getProduct(String code) {
+		ProductVO pvo = new ProductVO();
+		String sql = "select * from bookproduct where code=?";
+		
+		try {
+			con = DBman.getConnection();
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, code);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				pvo.setCode(rs.getInt("code"));
+				pvo.setName(rs.getString("name"));
+				pvo.setPrice(rs.getInt("price"));
+				pvo.setPictureurl(rs.getString("pictureurl"));
+				pvo.setDescription(rs.getString("description"));
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			DBman.close(con, pstmt, rs);
+		}
+		
+		return pvo;
+	}
 	
 	
 }
