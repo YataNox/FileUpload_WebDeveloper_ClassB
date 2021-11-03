@@ -3,6 +3,7 @@ package com.ezen.upload;
 import java.io.IOException;
 
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -11,6 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.ezen.dao.ProductDao;
 import com.ezen.dto.ProductVO;
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 /**
  * Servlet implementation class ProductUpdateServlet
@@ -46,7 +49,38 @@ public class ProductUpdateServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
+		request.setCharacterEncoding("UTF-8");
+		
+		ServletContext context = getServletContext();
+		String path = context.getRealPath("fileUpload");
+		String code="";
+		try {
+			MultipartRequest multi = new MultipartRequest(request,
+					path, 5*1024*1024, "UTF-8",
+					new DefaultFileRenamePolicy());
+			
+			code = multi.getParameter("code");
+			String name = multi.getParameter("name");
+			int price = Integer.parseInt(multi.getParameter("price"));
+			String description = multi.getParameter("description");
+			String pictureurl = multi.getParameter("pictureurl");
+			// 수정하고자 하는 이미지 이름이 널 값이라면, 기존 이미지 이름이 현재 수정 대상의 이미지 이름
+			// 으로 세트 됩니다.
+			if(pictureurl == null)
+				pictureurl = multi.getParameter("oldPicture");
+			ProductVO pvo = new ProductVO();
+			pvo.setCode(Integer.parseInt(code));
+			pvo.setName(name);
+			pvo.setPrice(price);
+			pvo.setDescription(description);
+			pvo.setPictureurl(pictureurl);
+			ProductDao pdao = ProductDao.getInstance();
+			pdao.updateProduct(pvo);
+		}catch(Exception e) {
+			System.out.println("파일 업로드 실패 : " + e);
+		}
+		RequestDispatcher rd = request.getRequestDispatcher("view.do?code=" + code);
+		rd.forward(request, response);
 	}
 
 }
