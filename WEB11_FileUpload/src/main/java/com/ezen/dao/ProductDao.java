@@ -70,6 +70,23 @@ public class ProductDao {
 		
 		return pvo;
 	}
-	
+
+	public void insertProduct(ProductVO pvo) {
+		String sql = "insert into bookproduct values(product_seq.nextVal, ?, ?, ?, ?)";
+		
+		try {
+			con = DBman.getConnection();
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, pvo.getName());
+			pstmt.setInt(2, pvo.getPrice());
+			pstmt.setString(3, pvo.getPictureurl());
+			pstmt.setString(4, pvo.getDescription());
+			pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			DBman.close(con, pstmt, rs);
+		}
+	}
 	
 }
