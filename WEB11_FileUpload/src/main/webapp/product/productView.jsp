@@ -28,21 +28,21 @@
 						<table>
 							<tr>
 								<th width="80">상품명</th>
-								<th>${Product.name}</th>
+								<td>${product.name}</td>
 							</tr>	
 							
 							<tr>
 								<th>가격</th>
-								<th>${Product.price}원</th>
+								<td>${product.price}원</td>
 							</tr>	
 							
 							<tr>
 								<th>설명</th>
-								<th>
+								<td>
 									<div style="height: 220px; width: 100%">
-										<pre>${Product.description}</pre>
+										<pre>${product.description}</pre>
 									</div>
-								</th>
+								</td>
 							</tr>	
 						</table>
 					</td>
