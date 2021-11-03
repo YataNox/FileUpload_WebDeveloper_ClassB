@@ -88,5 +88,25 @@ public class ProductDao {
 			DBman.close(con, pstmt, rs);
 		}
 	}
+
+	public void updateProduct(ProductVO pvo) {
+		String sql = "update bookproduct set name=?, price=?, "
+				+ "pictureurl=?, description=? where code=?";
+		
+		try {
+			con = DBman.getConnection();
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, pvo.getName());
+			pstmt.setInt(2, pvo.getPrice());
+			pstmt.setString(3, pvo.getPictureurl());
+			pstmt.setString(4, pvo.getDescription());
+			pstmt.setInt(5, pvo.getCode());
+			pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			DBman.close(con, pstmt, rs);
+		}
+	}
 	
 }
