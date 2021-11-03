@@ -5,7 +5,7 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>ProductList</title>
-		<link rel="stylesheet" type="text.css" href="css/product.css">
+		<link rel="stylesheet" type="text/css" href="css/product.css">
 	</head>
 	<body>
 		<div id="wrap" align="center">
