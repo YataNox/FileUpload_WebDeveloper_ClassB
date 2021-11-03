@@ -57,7 +57,7 @@ public class ProductWriteServlet extends HttpServlet {
 			pvo.setName(multi.getParameter("name"));
 			pvo.setPrice(Integer.parseInt(multi.getParameter("price")));
 			pvo.setDescription(multi.getParameter("description"));
-			pvo.setPictureurl(multi.getParameter("pictureurl"));
+			pvo.setPictureurl(multi.getFilesystemName("pictureurl"));
 		}catch(Exception e) {
 			System.out.println("파일 업로드 실패 : " + e);
 		}		
