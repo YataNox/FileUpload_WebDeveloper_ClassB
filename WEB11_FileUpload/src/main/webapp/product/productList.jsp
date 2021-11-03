@@ -23,7 +23,7 @@
 					<th>수정</th>
 					<th>삭제</th>
 				</tr>
-				<c:forEach var="product" items="${productlist}">
+				<c:forEach var="product" items="${productList}">
 					<tr class="record">
 						<td align="center">
 							${product.code}
