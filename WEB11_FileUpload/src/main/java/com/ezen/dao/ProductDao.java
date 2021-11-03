@@ -3,9 +3,11 @@ package com.ezen.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import com.ezen.dto.ProductVO;
+import com.ezen.util.DBman;
 
 public class ProductDao {
 	private ProductDao() {}
@@ -18,6 +20,27 @@ public class ProductDao {
 	
 	public ArrayList<ProductVO> selectAll() {
 		ArrayList<ProductVO> list = new ArrayList<ProductVO>();
+		String sql = "select * from bookproduct order by code desc";
+		
+		try {
+			con = DBman.getConnection();
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				ProductVO pvo = new ProductVO();
+				pvo.setCode(rs.getInt("code"));
+				pvo.setName(rs.getString("name"));
+				pvo.setPrice(rs.getInt("price"));
+				pvo.setPictureurl(rs.getString("pictureurl"));
+				pvo.setDescription(rs.getString("description"));
+				list.add(pvo);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			DBman.close(con, pstmt, rs);
+		}
 		
 		return list;
 	}
